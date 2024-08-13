@@ -4,52 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gjestebok.Commands
+namespace GuestBook.Commands
 {
     internal class AddNewParty : ICommand
     {
         public int Id => 1;
         public string Text => "Add new party";
 
-        public void Execute()
+        public void Execute(Book currentBook)
         {
             "Type in the name of the person Responsible for the party.".PrintStringToConsole();
-            string resName = "Full Name:".RequestUIString();
+            string resName = "Full Name:".RequestString();
             Party newParty = new Party(resName);
-            bool adding = AddingGuestsUIChoice();
+            bool adding = AddingGuestsChoice();
 
             while (adding)
             {
-                newParty.AddGuest(AddNewGuestUI());
-                adding = AddingGuestsUIChoice();
+                newParty.AddGuest(AddNewGuest());
+                adding = AddingGuestsChoice();
             }
+
+            currentBook.AddParty(newParty);
         }
 
-        Party AddNewPartyUI()
-        {
-            "Type in the name of the person Responsible for the party.".PrintStringToConsole();
-            string resName = "Full Name:".RequestUIString();
-            Party newParty = new Party(resName);
-            bool adding = AddingGuestsUIChoice();
 
-            while (adding)
-            {
-                newParty.AddGuest(AddNewGuestUI());
-                adding = AddingGuestsUIChoice();
-            }
-            return newParty;
-        }
-
-        Guest AddNewGuestUI()
+        Guest AddNewGuest()
         {
-            string name = "Full name:".RequestUIString();
+            string name = "Full name:".RequestString();
             Guest newGuest = new Guest(name);
             return newGuest;
         }
 
-        public bool AddingGuestsUIChoice()
+        public bool AddingGuestsChoice()
         {
-            string answer = "Type 1 to add new guest, type anything else to quit making party: ".RequestUIString();
+            string answer = "Type 1 to add new guest, type anything else to quit making party: ".RequestString();
 
             return answer == "1";
         }

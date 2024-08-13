@@ -13,7 +13,7 @@ namespace GuestBook
            System.Console.WriteLine(message);
         }
 
-        public static string RequestString(this string message)
+        public static string RequestUIString(this string message)
         {
             var input = "";
 
@@ -26,7 +26,7 @@ namespace GuestBook
             return input;
         }
 
-        public static int RequestInt(this string message)
+        public static int RequestUIInt(this string message)
         {
             var input = "";
             var output = 0;

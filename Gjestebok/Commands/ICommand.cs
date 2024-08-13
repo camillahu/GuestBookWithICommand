@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gjestebok.Commands
+namespace GuestBook.Commands
 {
     internal interface ICommand
     {
         public int Id { get; }
         public string Text { get; }
-        public void Execute();
+        public void Execute(Book currentBook);
 
         
 

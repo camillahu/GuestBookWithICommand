@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gjestebok
+namespace GuestBook
 {
     internal class Party
     {
-        public string ReservationName { get; private set; }
-        private List<Guest> Guests { get; set; } = [];
+        public string ReservationName {get;}
+        private List<Guest> Guests {get;} = [];
 
         public Party(string resName)
         {

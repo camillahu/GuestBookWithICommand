@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gjestebok
+namespace GuestBook
 {
     internal class Book
     {
@@ -22,21 +22,13 @@ namespace Gjestebok
             parties.Add(newParty);
         }
 
-        public void FindParty()
+        public void FindParty(string name)
         {
-            "Type your name search here:".PrintStringToConsole();
-            string name = GetUINameSearch();
-
             var match = parties.Where(party => party.ReservationName.Split(' ').Any(part => part.StartsWith(name, StringComparison.OrdinalIgnoreCase)));
             foreach (Party m in match)
             {
                 m.PrintNameAndGuestNum();
-            }
-        }
-
-        public string GetUINameSearch()
-        {
-            return System.Console.ReadLine();
+            } 
         }
 
         public void PrintBookList()
