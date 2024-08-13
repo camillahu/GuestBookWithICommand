@@ -27,7 +27,6 @@ namespace GuestBook.Commands
             currentBook.AddParty(newParty);
         }
 
-
         Guest AddNewGuest()
         {
             string name = "Full name:".RequestString();

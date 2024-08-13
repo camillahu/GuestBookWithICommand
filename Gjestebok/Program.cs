@@ -3,7 +3,7 @@ using GuestBook;
 using GuestBook.Commands;
 
 Book currentBook = new Book(DateTime.Now.ToString("dd/MM/YYYY"));
-bool mainMenuRunning = true;
+
 
 List<ICommand?> commands =
 [
@@ -17,13 +17,13 @@ List<ICommand?> commands =
 MainMenu();
 void MainMenu()
 {
+    bool mainMenuRunning = true;
     $"Welcome to today's book ({currentBook.DateString})".PrintStringToConsole();
 
     while (mainMenuRunning)
     {
         ViewCommands();
         ICommand? choice = ChooseOption();
-        mainMenuRunning = false;
         choice?.Execute(currentBook); //vits i å gjøre alt nullable?
         mainMenuRunning = true;
     }

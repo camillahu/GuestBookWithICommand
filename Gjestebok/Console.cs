@@ -41,7 +41,7 @@ namespace GuestBook
                 if (string.IsNullOrWhiteSpace(input) || !isValidInput)
                 {
                     "Invalid input, please try again".PrintStringToConsole();
-                } //denne funker ikke helt optimalt
+                } 
             }
 
             return output;
