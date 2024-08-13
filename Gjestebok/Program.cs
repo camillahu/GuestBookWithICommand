@@ -1,8 +1,15 @@
 ﻿
 using Gjestebok;
+using Gjestebok.Commands;
 
 Book currentBook = new Book(DateTime.Now.ToString("dd/MM/YYY"));
-bool mainMenuRunning = true; 
+bool mainMenuRunning = true;
+
+List <ICommand> commands =
+[
+    new AddNewParty()
+
+];
 
 MainMenu();
 void MainMenu()
@@ -11,16 +18,16 @@ void MainMenu()
 
     while (mainMenuRunning)
     {
-        "".PrintStringToConsole();
-        mainMenuRunning = false;
-        ChooseOption();
-        "".PrintStringToConsole();
+        ViewCommands();
     }
 }
 
-void ChooseOption()
+IEnumerable<ICommand> ChooseOption()
 {
-    
+    int input = "What do you want to do?".RequestUIInt();
+    IEnumerable<ICommand> command = commands.Where(c => c.Id == input);
+    return command;
+
     "1. Add new party \n2. Search for party \n3. See all parties \n4. See all parties with names".PrintStringToConsole();
     string menuChoice = "Choose an option:".RequestUIString();
     switch (menuChoice)
@@ -44,31 +51,12 @@ void ChooseOption()
     }
 }
 
-Party AddNewPartyUI()
-{
-    "Type in the name of the person Responsible for the party.".PrintStringToConsole();
-    string resName = "Full Name:".RequestUIString();
-    Party newParty = new Party(resName);
-    bool adding = AddingGuestsUIChoice();
 
-    while (adding)
+void ViewCommands()
+{
+    foreach (ICommand cmd in commands)
     {
-        newParty.AddGuest(AddNewGuestUI());
-        adding = AddingGuestsUIChoice();
+        $"{cmd.Id}. {cmd.Text} ".PrintStringToConsole();
     }
-    return newParty; 
-};
-
-Guest AddNewGuestUI()
-{
-    string name = "Full name:".RequestUIString();
-    Guest newGuest = new Guest(name);
-    return newGuest;
 }
 
-bool AddingGuestsUIChoice()
-{
-    string answer = "Type 1 to add new guest, type anything else to quit making party: ".RequestUIString();
-
-    return answer == "1";
-}
